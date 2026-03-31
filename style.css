@@ -7,7 +7,7 @@
 
 /* Base page styles */
 body {
-  font-family: Arial, sans-serif;
+  font-family: Helvetica, Garamond;
   background-color: #f1f1f1;
   padding: 20px;
 }
@@ -155,6 +155,15 @@ button:hover {
   height: 40px;
   border-radius: 50%;
   cursor: pointer;
+
+  font-display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 28px;
+  line-height: 1;
+  padding: 0;
+
 }
 
 .close-modal:hover {
@@ -184,6 +193,33 @@ button:hover {
 /* Make gallery cards feel clickable */
 .gallery-item {
   cursor: pointer;
+}
+/* Space fact section */
+.space-fact {
+  background: white;
+  padding: 20px;
+  margin: 0 20px 20px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.space-fact h2 {
+  margin-bottom: 10px;
+  color: #212121;
+  font-family: Verdana, sans-serif;
+}
+
+.space-fact p {
+  color: #555;
+  line-height: 1.5;
+  font-size: 16px;
+}
+
+@media (min-width: 600px) {
+  .space-fact {
+    margin: 0 0 20px 0;
+  }
 }
 
 /* Three columns on wider screens */

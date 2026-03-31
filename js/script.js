@@ -1,4 +1,6 @@
 
+// Referenes for space facts
+const factText = document.getElementById('factText');
 // Get references to DOM elements for modal and gallery
 const modal = document.getElementById('imageModal');
 const closeModalButton = document.getElementById('closeModal');
@@ -15,8 +17,22 @@ const startInput = document.getElementById('startDate');
 const endInput = document.getElementById('endDate');
 const gallery = document.getElementById('gallery');
 
+// Array of space facts
+const spaceFacts = [
+  "A day on Venus is longer than a year on Venus.",
+  "Neutron stars can spin at more than 600 times per second.",
+  "One million Earths could fit inside the Sun.",
+  "There are more stars in the universe than grains of sand on all the beaches on Earth.",
+  "The footprints left on the Moon can last for millions of years.",
+  "Jupiter has the shortest day of any planet in our solar system.",
+  "Saturn could float in water because it is mostly made of gas.",
+  "Light from the Sun takes about 8 minutes to reach Earth."
+];
+
+
 // Set up default date inputs
 setupDateInputs(startInput, endInput);
+showRandomSpaceFact();
 
 // Button click
 button.addEventListener('click', getSpaceImages);
@@ -100,3 +116,9 @@ document.addEventListener('keydown', (event) => {
     closeModal();
   }
 });
+
+// Function for space facts
+function showRandomSpaceFact() {
+  const randomIndex = Math.floor(Math.random() * spaceFacts.length);
+  factText.textContent = spaceFacts[randomIndex];
+}
