@@ -1,20 +1,26 @@
-//API keys for NASA's APOD API
-const API = " T49Y86L468avfnsKJyAfqrfm4fwHz4KGYmDU7jiL";
-const url =  `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`;
+
+// Get references to DOM elements for modal and gallery
+const modal = document.getElementById('imageModal');
+const closeModalButton = document.getElementById('closeModal');
+const modalImage = document.getElementById('modalImage');
+const modalTitle = document.getElementById('modalTitle');
+const modalDate = document.getElementById('modalDate');
+const modalExplanation = document.getElementById('modalExplanation');
+
+// API key for NASA's APOD API
+const API_KEY = "T49Y86L468avfnsKJyAfqrfm4fwHz4KGYmDU7jiL";
+
 const button = document.getElementById('getImagesButton');
-// Find our date picker inputs on the page
 const startInput = document.getElementById('startDate');
 const endInput = document.getElementById('endDate');
+const gallery = document.getElementById('gallery');
 
-button.addEventListener('click', getSpaceImages);
-
-// Call the setupDateInputs function from dateRange.js
-// This sets up the date pickers to:
-// - Default to a range of 9 days (from 9 days ago to today)
-// - Restrict dates to NASA's image archive (starting from 1995)
+// Set up default date inputs
 setupDateInputs(startInput, endInput);
 
-// Fetch
+// Button click
+button.addEventListener('click', getSpaceImages);
+
 async function getSpaceImages() {
   const startDate = startInput.value;
   const endDate = endInput.value;
@@ -27,8 +33,7 @@ async function getSpaceImages() {
   try {
     gallery.innerHTML = `<p>Loading images...</p>`;
 
-    const apiKey = "DEMO_KEY";
-    const url = `https://api.nasa.gov/planetary/apod?api_key=${apiKey}&start_date=${startDate}&end_date=${endDate}`;
+    const url = `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}&start_date=${startDate}&end_date=${endDate}`;
 
     const response = await fetch(url);
     if (!response.ok) {
@@ -55,6 +60,12 @@ async function getSpaceImages() {
       `;
 
       gallery.appendChild(card);
+
+      card.addEventListener('click', () => {
+      if (item.media_type === 'image') {
+        openModal(item);
+      }
+});
     });
   } catch (error) {
     gallery.innerHTML = `<p>Error loading space images.</p>`;
@@ -62,3 +73,30 @@ async function getSpaceImages() {
   }
 }
 
+// Modal function to open and close the image details
+function openModal(item) {
+  modalImage.src = item.url;
+  modalImage.alt = item.title;
+  modalTitle.textContent = item.title;
+  modalDate.textContent = item.date;
+  modalExplanation.textContent = item.explanation;
+  modal.classList.remove('hidden');
+}
+
+function closeModal() {
+  modal.classList.add('hidden');
+}
+
+closeModalButton.addEventListener('click', closeModal);
+
+modal.addEventListener('click', (event) => {
+  if (event.target === modal) {
+    closeModal();
+  }
+});
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') {
+    closeModal();
+  }
+});
