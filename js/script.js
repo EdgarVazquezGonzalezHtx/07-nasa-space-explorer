@@ -1,7 +1,7 @@
 //API keys for NASA's APOD API
 const API = " T49Y86L468avfnsKJyAfqrfm4fwHz4KGYmDU7jiL";
 const url =  `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`;
-
+const button = document.getElementById('getImagesButton');
 // Find our date picker inputs on the page
 const startInput = document.getElementById('startDate');
 const endInput = document.getElementById('endDate');
